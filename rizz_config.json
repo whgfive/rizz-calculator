@@ -1,0 +1,9 @@
+{
+    "rizz_labels": [
+      {"max": 20, "label": "Low Rizz"},
+      {"max": 40, "label": "Mild Rizz"},
+      {"max": 60, "label": "Moderate Rizz"},
+      {"max": 80, "label": "High Rizz"},
+      {"max": 100, "label": "God-tier Rizz"}
+    ]
+}
