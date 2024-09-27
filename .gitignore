@@ -42,7 +42,7 @@ logs
 *.log
 
 # Docker
-.docker
+.dockerignore
 
 # Redis
 dump.rdb
