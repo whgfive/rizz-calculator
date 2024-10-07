@@ -1,23 +1,49 @@
 version: '3.8'
 
 services:
-  web:
+  rizz-web:
     build: .
+    container_name: rizz-web
+    restart: unless-stopped
+    networks:
+      - rizz-docker
     depends_on:
-      - redis
+      - rizz-redis
     environment:
-      - REDIS_HOST=redis
+      - REDIS_HOST=rizz-redis
     volumes:
       - .:/app
 
-  redis:
+  rizz-redis:
     image: "redis:alpine"
+    container_name: rizz-redis
+    restart: unless-stopped
+    networks:
+      - rizz-docker
 
-  nginx:
+  rizz-nginx:
     image: nginx:alpine
-    ports:
-      - "80:80"
+    container_name: rizz-nginx
+    restart: unless-stopped
+    networks:
+      - proxy
+      - rizz-docker
+    #ports:
+    #  - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - web
+      - rizz-web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rizz-nginx.rule=Host(`rizzcalculator.com`)"
+      - "traefik.http.routers.rizz-nginx.entrypoints=https"
+      - "traefik.http.routers.rizz-nginx.tls=true"
+      - "traefik.port=80"
+      - "traefik.docker.network=proxy"
+
+networks:
+  rizz-docker:
+    external: true
+  proxy:
+    external: true
