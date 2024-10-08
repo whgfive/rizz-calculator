@@ -1,9 +1,10 @@
 {
-    "rizz_labels": [
-      {"max": 20, "label": "Low Rizz"},
-      {"max": 40, "label": "Mild Rizz"},
-      {"max": 60, "label": "Moderate Rizz"},
-      {"max": 80, "label": "High Rizz"},
-      {"max": 100, "label": "God-tier Rizz"}
+    "rizz_levels": [
+        {"range": [0, 20], "label": "Negative Rizz", "description": "Yikes, touch grass"},
+        {"range": [21, 40], "label": "Mid Rizz", "description": "No cap, kinda basic"},
+        {"range": [41, 60], "label": "Bussin' Rizz", "description": "On fleek, but room to level up"},
+        {"range": [61, 80], "label": "Slay Rizz", "description": "Main character energy"},
+        {"range": [81, 95], "label": "Goated Rizz", "description": "Absolute W, no skips"},
+        {"range": [96, 100], "label": "Rizz Lord", "description": "Caught in 4K, living rent-free"}
     ]
 }

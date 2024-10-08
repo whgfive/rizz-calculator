@@ -92,7 +92,11 @@
             width: 100%;
             text-align: center;
         }
-        
+        #rizzDescription {
+            font-size: 16px;
+            margin-top: 10px;
+            color: #f8f9fa;
+        }
         /* New styles for icons */
         .input-icon {
             position: absolute;
@@ -145,6 +149,7 @@
             </div>
             <div class="rizz-label-container">
                 <p id="rizzLabel"></p>
+                <p id="rizzDescription"></p>
             </div>
             <button id="calculateAnother" class="btn btn-primary w-100 mt-3">
                 <i class="fas fa-redo"></i> Calculate Another
@@ -184,6 +189,7 @@
                     const cacheStatus = data.from_cache ? " (Old Rizzler)" : " (New Rizzler)";
                     document.getElementById('rizzResult').textContent = resultText + cacheStatus;
                     document.getElementById('rizzLabel').textContent = `${data.rizz_label}`;
+                    document.getElementById('rizzDescription').textContent = `${data.rizz_description}`;
                     document.getElementById('result').style.display = 'block';
                 });
             }, 1500);
@@ -195,6 +201,7 @@
             document.getElementById('result').style.display = 'none';
             document.getElementById('rizzResult').textContent = '';
             document.getElementById('rizzLabel').textContent = '';
+            document.getElementById('rizzDescription').textContent = '';
         });
     </script>
 </body>

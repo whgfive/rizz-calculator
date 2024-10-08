@@ -13,11 +13,17 @@ redis_client = redis.Redis(host=os.environ.get('REDIS_HOST', 'localhost'), port=
 with open('rizz_config.json', 'r') as config_file:
     config = json.load(config_file)
 
-def get_rizz_label(rizz_level):
-    for label_info in config['rizz_labels']:
-        if rizz_level <= label_info['max']:
-            return label_info['label']
-    return config['rizz_labels'][-1]['label']  # Return the last label if no match
+def get_rizz_info(rizz_level):
+    for level_info in config['rizz_levels']:
+        if level_info['range'][0] <= rizz_level <= level_info['range'][1]:
+            return {
+                'label': level_info['label'],
+                'description': level_info['description']
+            }
+    return {
+        'label': "Unknown Rizz Level",
+        'description': "Score out of range"
+    }
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -35,11 +41,12 @@ def index():
             redis_client.set(name, rizz_level)
             from_cache = False
         
-        rizz_label = get_rizz_label(rizz_level)
+        rizz_info = get_rizz_info(rizz_level)
         
         return jsonify({
             'rizz_level': rizz_level,
-            'rizz_label': rizz_label,
+            'rizz_label': rizz_info['label'],
+            'rizz_description': rizz_info['description'],
             'from_cache': from_cache
         })
     return render_template('input.html')
