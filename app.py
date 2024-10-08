@@ -6,6 +6,7 @@ import redis
 import json
 
 app = Flask(__name__)
+app.config['SERVER_NAME'] = 'rizzcalculator.com'
 redis_client = redis.Redis(host=os.environ.get('REDIS_HOST', 'localhost'), port=6379, db=0)
 
 # Load the configuration file
